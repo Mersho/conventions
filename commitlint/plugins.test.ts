@@ -6,7 +6,7 @@ function runCommitLintOnMsg(inputMsg: string) {
 
 test("my-dummy-test", () => {
     let afshinCommit =
-        "Backend: adjust legacy obj path (#218)\n\nUsing the same folder for two projects (e.g.\nGWallet.Backend.fsproj and GWallet.Backend-legacy.fsproj) that\nuse different frameworks (e.g. NetStandard2.0 one and .NET4.x\none), causes problems due to incompatible caches in obj folder,\nso by adjusting the cache obj folder for the legacy version we\nworkaround this problem.";
+        "Backend: adjust legacy obj path (#218)\r\n\r\nUsing the same folder for two projects (e.g.\r\nGWallet.Backend.fsproj and GWallet.Backend-legacy.fsproj) that\r\nuse different frameworks (e.g. NetStandard2.0 one and .NET4.x\r\none), causes problems due to incompatible caches in obj folder,\r\nso by adjusting the cache obj folder for the legacy version we\r\nworkaround this problem.";
     let bodyProse18 = runCommitLintOnMsg(afshinCommit);
     console.log(bodyProse18.stdout + "");
     expect(bodyProse18.status).toBe(0);
