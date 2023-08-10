@@ -14,6 +14,7 @@ export abstract class Plugins {
             let bodyStr = rawStr.substring(lineBreakIndex).trim();
 
             bodyStr = Helpers.removeAllCodeBlocks(bodyStr).trim();
+            console.log("bodystr: " + bodyStr);
 
             if (bodyStr !== "") {
                 function paragraphHasValidEnding(paragraph: string): boolean {
@@ -65,6 +66,11 @@ export abstract class Plugins {
                             offence = true;
                         }
                     }
+
+                    console.log("offence : " + offence);
+                    console.log(!validParagraphEnd);
+                    console.log(Helpers.isValidUrl(lines[lines.length - 1]));
+                    console.log(Helpers.isFooterNote(lines[lines.length - 1]));
 
                     if (
                         !validParagraphEnd &&
