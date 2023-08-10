@@ -4,6 +4,14 @@ function runCommitLintOnMsg(inputMsg: string) {
     return spawnSync("npx", ["commitlint", "--verbose"], { input: inputMsg });
 }
 
+test("my-dummy-test", () => {
+    let afshinCommit =
+        "Backend: adjust legacy obj path (#218)\n\nUsing the same folder for two projects (e.g.\nGWallet.Backend.fsproj and GWallet.Backend-legacy.fsproj) that\nuse different frameworks (e.g. NetStandard2.0 one and .NET4.x\none), causes problems due to incompatible caches in obj folder,\nso by adjusting the cache obj folder for the legacy version we\nworkaround this problem.";
+    let bodyProse18 = runCommitLintOnMsg(afshinCommit);
+    console.log(bodyProse18 + "");
+    expect(bodyProse18.status).not.toBe(0);
+});
+
 test("body-prose1", () => {
     let commitMsgWithLowercaseBodyStart =
         "foo: this is only a title" + "\n\n" + "bla blah bla.";
