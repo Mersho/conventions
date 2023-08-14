@@ -16,7 +16,7 @@ export abstract class Plugins {
             .replace(macEol, unixEol);
 
         let lineBreakIndex = rawStr.indexOf("\n");
-        console.log("rawStr: " + rawStr);
+        console.log("rawStr: " + JSON.stringify(rawStr));
 
         if (lineBreakIndex >= 0) {
             // Extracting bodyStr from rawStr rather than using body directly is a
@@ -57,7 +57,7 @@ export abstract class Plugins {
 
                 for (let paragraph of Helpers.splitByEOLs(bodyStr, 2)) {
                     paragraph = paragraph.trim();
-                    console.log("paragraph: " + paragraph);
+                    console.log("paragraph: " + JSON.stringify(paragraph));
 
                     if (paragraph === "") {
                         continue;
@@ -69,10 +69,10 @@ export abstract class Plugins {
 
                     let lines = Helpers.splitByEOLs(paragraph, 1);
 
-                    console.log("startWithLowerCase: " + startWithLowerCase);
-                    console.log("validParagraphEnd: " + validParagraphEnd);
-                    console.log("lines: " + lines);
-                    console.log("offence: " + offence);
+                    console.log("startWithLowerCase: " + JSON.stringify(startWithLowerCase));
+                    console.log("validParagraphEnd: " + JSON.stringify(validParagraphEnd));
+                    console.log("lines: " + JSON.stringify(lines));
+                    console.log("offence: " + JSON.stringify(offence));
 
                     if (startWithLowerCase) {
                         if (
@@ -82,8 +82,8 @@ export abstract class Plugins {
                         }
                     }
 
-                    console.log(Helpers.isValidUrl(lines[lines.length - 1]));
-                    console.log(Helpers.isFooterNote(lines[lines.length - 1]))
+                    console.log("Helpers.isValidUrl" + Helpers.isValidUrl(lines[lines.length - 1]));
+                    console.log("Helpers.isValidUrl" + Helpers.isFooterNote(lines[lines.length - 1]))
 
                     if (
                         !validParagraphEnd &&
