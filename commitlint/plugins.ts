@@ -12,8 +12,8 @@ export abstract class Plugins {
         let macEol = "\r";
 
         rawStr = rawStr
-            .replace(windowsEol, unixEol)
-            .replace(macEol, unixEol);
+            .replaceAll(windowsEol, unixEol)
+            .replaceAll(macEol, unixEol);
 
         let lineBreakIndex = rawStr.indexOf("\n");
         console.log("rawStr: " + JSON.stringify(rawStr));
