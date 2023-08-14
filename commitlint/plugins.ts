@@ -7,14 +7,6 @@ export abstract class Plugins {
 
         rawStr = rawStr.trim();
 
-        let unixEol = "\n";
-        let windowsEol = "\r\n";
-        let macEol = "\r";
-
-        rawStr = rawStr
-            .replaceAll(windowsEol, unixEol)
-            .replaceAll(macEol, unixEol);
-
         let lineBreakIndex = rawStr.indexOf("\n");
         console.log("rawStr: " + JSON.stringify(rawStr));
 
