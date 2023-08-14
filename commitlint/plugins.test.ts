@@ -182,7 +182,7 @@ test("body-prose17", () => {
         "GWallet.Backend.fsproj and GWallet.Backend-legacy.fsproj) that\r\n" + 
         "use different frameworks (e.g. NetStandard2.0 one and .NET4.x\r\n" + 
         "one), causes problems due to incompatible caches in obj folder,\r\n" + 
-        "so by adjusting the cache obj folder for the legacy version we\r\n"
+        "so by adjusting the cache obj folder for the legacy version we\r\n" +
         "workaround this problem.";
     let bodyProse17 = runCommitLintOnMsg(afshinCommit);
     console.log(bodyProse17.stdout + "");
