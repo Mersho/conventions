@@ -189,6 +189,15 @@ test("body-prose17", () => {
     expect(bodyProse17.status).toBe(0);
 });
 
+test("body-prose18", () => {
+    let commitMsgWithWindowsEOL =
+        "title: this is only title\r\n\r\n" +
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit\r\n" +
+        "nam sed porttitor turpis, vitae erat curae."
+    let bodyProse18 = runCommitLintOnMsg(commitMsgWithWindowsEOL);
+    expect(bodyProse18.status).toBe(0);
+});
+
 test("body-max-line-length1", () => {
     let tenChars = "1234 67890";
     let sixtyChars =
