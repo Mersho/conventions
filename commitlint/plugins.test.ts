@@ -175,6 +175,20 @@ test("body-prose16", () => {
     expect(bodyProse16.status).toBe(0);
 });
 
+test("body-prose17", () => {
+    let afshinCommit =
+        "Backend: adjust legacy obj path (#218)\r\n\r\n" +
+        "Using the same folder for two projects (e.g.\r\n" + 
+        "GWallet.Backend.fsproj and GWallet.Backend-legacy.fsproj) that\r\n" + 
+        "use different frameworks (e.g. NetStandard2.0 one and .NET4.x\r\n" + 
+        "one), causes problems due to incompatible caches in obj folder,\r\n" + 
+        "so by adjusting the cache obj folder for the legacy version we\r\n"
+        "workaround this problem.";
+    let bodyProse17 = runCommitLintOnMsg(afshinCommit);
+    console.log(bodyProse17.stdout + "");
+    expect(bodyProse17.status).toBe(0);
+});
+
 test("body-max-line-length1", () => {
     let tenChars = "1234 67890";
     let sixtyChars =
