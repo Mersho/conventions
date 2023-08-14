@@ -6,6 +6,15 @@ export abstract class Plugins {
         let offence = false;
 
         rawStr = rawStr.trim();
+
+        let unixEol = "\n";
+        let windowsEol = "\r\n";
+        let macEol = "\r";
+
+        rawStr = rawStr
+            .replace(windowsEol, unixEol)
+            .replace(macEol, unixEol);
+
         let lineBreakIndex = rawStr.indexOf("\n");
 
         if (lineBreakIndex >= 0) {
