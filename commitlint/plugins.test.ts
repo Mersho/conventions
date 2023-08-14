@@ -193,7 +193,8 @@ test("body-prose18", () => {
     let commitMsgWithWindowsEOL =
         "title: this is only title\r\n\r\n" +
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit\r\n" +
-        "nam sed porttitor turpis, vitae erat curae."
+        "lorem ipsum dolor sit amet, consectetur porttitor jidga\r\n" +
+        "nam sed porttitor turpis, vitae erat curae.";
     let bodyProse18 = runCommitLintOnMsg(commitMsgWithWindowsEOL);
     expect(bodyProse18.status).toBe(0);
 });
