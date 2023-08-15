@@ -14,6 +14,7 @@ export abstract class Plugins {
             let bodyStr = rawStr.substring(lineBreakIndex).trim();
 
             bodyStr = Helpers.removeAllCodeBlocks(bodyStr).trim();
+            console.log("bodystr: " + JSON.stringify(bodyStr));
 
             if (bodyStr !== "") {
                 function paragraphHasValidEnding(paragraph: string): boolean {
@@ -47,6 +48,7 @@ export abstract class Plugins {
 
                 for (let paragraph of Helpers.splitByEOLs(bodyStr, 2)) {
                     paragraph = paragraph.trim();
+                    console.log("paragraph: " + JSON.stringify(paragraph));
 
                     if (paragraph === "") {
                         continue;
@@ -57,6 +59,7 @@ export abstract class Plugins {
                     let validParagraphEnd = paragraphHasValidEnding(paragraph);
 
                     let lines = Helpers.splitByEOLs(paragraph, 1);
+                    console.log("lines: " + JSON.stringify(lines));
 
                     if (startWithLowerCase) {
                         if (
@@ -65,6 +68,11 @@ export abstract class Plugins {
                             offence = true;
                         }
                     }
+
+                    console.log("offence : " + offence);
+                    console.log("validParagraphEnd: " + validParagraphEnd);
+                    console.log("isValidUrl: " + Helpers.isValidUrl(lines[lines.length - 1]));
+                    console.log("isFooterNote: " + Helpers.isFooterNote(lines[lines.length - 1]));
 
                     if (
                         !validParagraphEnd &&
