@@ -478,38 +478,36 @@ let ContainsConsoleMethods(fileInfo: FileInfo) =
     consoleMethods |> List.exists fileText.Contains
 
 
-let NotFollowingConsoleAppConvention(fileInfo: FileInfo) =
+let ReturnAllProjectSourceFile (dir: FileInfo) (patterns: List<string>) (shouldFilter: bool) =
+    let parentDir = Path.GetDirectoryName dir.FullName |> DirectoryInfo
+   
+    seq {
+        for pattern in patterns do
+            if shouldFilter then
+                yield Helpers.GetFiles parentDir pattern
+            else
+                yield 
+                    Directory.GetFiles(
+                        parentDir.FullName,
+                        pattern,
+                        SearchOption.AllDirectories
+                    )
+                    |> Seq.map(fun pathStr -> FileInfo pathStr)
+
+    } |> Seq.concat
+
+
+let NotFollowingConsoleAppConvention(fileInfo: FileInfo) (shouldFilter: bool) =
+    // TODO: assert for proj file
     let fileText = File.ReadAllText fileInfo.FullName
     let parentDir = Path.GetDirectoryName fileInfo.FullName
 
     if not(fileText.Contains "<OutputType>Exe</OutputType>") then
-        let rec allFiles dirs =
-            if Seq.isEmpty dirs then
-                Seq.empty
-            else
-                let csFiles =
-                    dirs
-                    |> Seq.collect(fun dir ->
-                        Directory.EnumerateFiles(dir, "*.cs")
-                    )
-
-                let fsFiles =
-                    dirs
-                    |> Seq.collect(fun dir ->
-                        Directory.EnumerateFiles(dir, "*.fs")
-                    )
-
-                let projectDirectories =
-                    dirs
-                    |> Seq.collect Directory.EnumerateDirectories
-                    |> allFiles
-
-                Seq.append csFiles <| Seq.append fsFiles projectDirectories
-
-        let sourceFiles = allFiles(parentDir |> Seq.singleton)
+        let sourceFiles =
+            ReturnAllProjectSourceFile (FileInfo parentDir) ["*.cs"; "*.fs"] shouldFilter
 
         sourceFiles
-        |> Seq.exists(fun value -> ContainsConsoleMethods(FileInfo value))
+        |> Seq.exists(fun value -> ContainsConsoleMethods value)
 
     else
         // project name should ends with .Console
