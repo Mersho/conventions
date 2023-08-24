@@ -12,6 +12,7 @@ open Fsdk.Process
 
 #load "../src/FileConventions/Helpers.fs"
 #load "../src/FileConventions/Library.fs"
+
 open FileConventions
 open Helpers
 
@@ -26,33 +27,53 @@ if args.Length > 1 then
 let rootDir = FileInfo args.[0]
 
 // DefiningEmptyStringsWithDoubleQuotes
-let allSourceFiles = GetFiles (DirectoryInfo rootDir.FullName) "*.fs"
+let allSourceFiles = ReturnAllProjectSourceFile rootDir [ "*.cs"; "*.fs" ] true
 printfn "%A" (String.Join("\n", allSourceFiles))
-let allProjFiles = ReturnAllProjectSourceFile rootDir ["*.csproj"; "*.fsproj"]
 
-//for sourceFile in allSourceFiles do
-//    let isStringEmpty = DefiningEmptyStringsWithDoubleQuotes (FileInfo sourceFile)
-//    if isStringEmpty then
-//        failwith (sprintf "%s file: Contains empty strings specifed with \"\" , you should use String.Empty()" sourceFile)
+let allProjFiles =
+    ReturnAllProjectSourceFile rootDir [ "*.csproj"; "*.fsproj" ] true
+
+for sourceFile in allSourceFiles do
+    let isStringEmpty = DefiningEmptyStringsWithDoubleQuotes sourceFile
+
+    if isStringEmpty then
+        failwith(
+            sprintf
+                "%s file: Contains empty strings specifed with \"\" , you should use String.Empty()"
+                sourceFile.FullName
+        )
 
 
 // ProjFilesNamingConvention
 
-//for projfile in allProjFiles do
-//    let isWrongProjFile = ProjFilesNamingConvention(FileInfo projfile)
-//    if isWrongProjFile then
-//        failwith (sprintf "%s file: Project file or Project directory is incorrect!\n
-//        Fix: use same name on .csproj/.fsproj on parrent project directory" projfile)
+for projfile in allProjFiles do
+    let isWrongProjFile = ProjFilesNamingConvention projfile
 
-//// NotFollowingNamespaceConvention 
-//for sourceFile in allSourceFiles do
-//    let isWrongNamespace = NotFollowingNamespaceConvention (FileInfo sourceFile)
-//    if isWrongNamespace then
-//        failwith (sprintf "%s file: has wrong namespace!" sourceFile)
+    if isWrongProjFile then
+        failwith(
+            sprintf
+                "%s file: Project file or Project directory is incorrect!\n
+        Fix: use same name on .csproj/.fsproj on parrent project directory"
+                projfile.FullName
+        )
+
+// notfollowingnamespaceconvention
+for sourcefile in allSourceFiles do
+    let iswrongnamespace = NotFollowingNamespaceConvention sourcefile
+
+    if iswrongnamespace then
+        failwith(sprintf "%s file: has wrong namespace!" sourcefile.FullName)
 
 // NotFollowingConsoleAppConvention
 for projfile in allProjFiles do
-    let isWrongConsoleApplication = NotFollowingConsoleAppConvention projfile
-    printfn "%A" projfile 
+    let isWrongConsoleApplication =
+        NotFollowingConsoleAppConvention projfile true
+
+    printfn "%A" projfile
+
     if isWrongConsoleApplication then
-        failwith (sprintf "%s project: Should not contain console methods or printf" projfile.FullName)
+        failwith(
+            sprintf
+                "%s project: Should not contain console methods or printf"
+                projfile.FullName
+        )
