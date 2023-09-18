@@ -151,7 +151,7 @@ export abstract class Helpers {
         let numNonAlphabeticalChars =
             Helpers.numNonAlphabeticalCharacters(word);
 
-        if(word[0] === undefined) throw "Can't find the first word"
+        if (word[0] === undefined) throw "Can't find the first word";
         return (
             numNonAlphabeticalChars > 0 ||
             (Helpers.isUpperCase(word[0]) && numUpperCase > 1) ||
@@ -161,7 +161,7 @@ export abstract class Helpers {
 
     public static wordIsStartOfSentence(word: string) {
         Helpers.assertWord(word);
-        if(word[0] === undefined) throw "Can't find the first word"
+        if (word[0] === undefined) throw "Can't find the first word";
         if (Helpers.isUpperCase(word[0])) {
             let numUpperCase = Helpers.numUpperCaseLetters(word);
             let numNonAlphabeticalChars =
