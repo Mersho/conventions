@@ -97,6 +97,7 @@ jobs:
           git --version
           node --version
           npm --version
+          npx tsc --version
           npx commitlint --version
           yarn --version
       - name: Run tests to validate our plugins
