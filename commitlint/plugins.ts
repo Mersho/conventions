@@ -6,6 +6,8 @@ export abstract class Plugins {
         function paragraphHasValidEnding(paragraph: string): boolean {
             let paragraphWords = paragraph.split(" ");
             let lastWordInParagraph = paragraphWords[paragraphWords.length - 1];
+            if (lastWordInParagraph === undefined)
+                throw "Can't find the lastWordInParagraph";
             let isParagraphEndingWithUrl =
                 Helpers.isValidUrl(lastWordInParagraph);
             if (isParagraphEndingWithUrl) {
@@ -21,10 +23,14 @@ export abstract class Plugins {
             ) {
                 return true;
             }
+
+            const lastTwoEndingChar = paragraph[paragraph.length - 2];
+            if (lastTwoEndingChar === undefined)
+                throw "Can't find last two letter of the paragraph";
             if (
                 endingChar === ")" &&
                 paragraph.length > 1 &&
-                paragraphHasValidEnding(paragraph[paragraph.length - 2])
+                paragraphHasValidEnding(lastTwoEndingChar)
             ) {
                 return true;
             }
@@ -51,6 +57,8 @@ export abstract class Plugins {
                         continue;
                     }
 
+                    if (paragraph[0] === undefined)
+                        throw "Can't find the first paragraph";
                     let startWithLowerCase = Helpers.isLowerCase(paragraph[0]);
 
                     let validParagraphEnd = paragraphHasValidEnding(paragraph);
@@ -58,6 +66,8 @@ export abstract class Plugins {
                     let lines = Helpers.splitByEOLs(paragraph, 1);
 
                     if (startWithLowerCase) {
+                        if (lines[0] === undefined)
+                            throw "Can't find the first line";
                         if (
                             !(lines.length == 1 && Helpers.isValidUrl(lines[0]))
                         ) {
@@ -65,10 +75,13 @@ export abstract class Plugins {
                         }
                     }
 
+                    const lastLine = lines[lines.length - 1];
+                    if (lastLine === undefined)
+                        throw "Can't find the last line";
                     if (
                         !validParagraphEnd &&
-                        !Helpers.isValidUrl(lines[lines.length - 1]) &&
-                        !Helpers.isFooterNote(lines[lines.length - 1])
+                        !Helpers.isValidUrl(lastLine) &&
+                        !Helpers.isFooterNote(lastLine)
                     ) {
                         offence = true;
                     }
@@ -279,6 +292,7 @@ export abstract class Plugins {
 
     public static titleUppercase(headerStr: string) {
         let firstWord = headerStr.split(" ")[0];
+        if (firstWord === undefined) throw "Can't find the firstWord";
         let offence =
             headerStr.indexOf(":") < 0 &&
             !Helpers.wordIsStartOfSentence(firstWord) &&
@@ -337,7 +351,9 @@ export abstract class Plugins {
         if (colonFirstIndex > 0 && headerStr.length > colonFirstIndex) {
             let subject = headerStr.substring(colonFirstIndex + 1).trim();
             if (subject != null && subject.length > 1) {
-                firstWord = subject.trim().split(" ")[0];
+                let wordsArr = subject.trim().split(" ");
+                if (wordsArr[0] === undefined) throw "Can't find the firstWord";
+                firstWord = wordsArr[0];
                 offence = Helpers.wordIsStartOfSentence(firstWord);
             }
         }
@@ -447,7 +463,7 @@ export abstract class Plugins {
                 // NOTE: we don't iterate over the last line, on purpose
                 for (let i = 0; i < lines.length - 1; i++) {
                     let line = lines[i];
-
+                    if (line === undefined) throw "Can't find line";
                     if (line.length == 0) {
                         continue;
                     }
@@ -455,18 +471,24 @@ export abstract class Plugins {
                     if (line.length < paragraphLineMinLength) {
                         // this ref doesn't go out of bounds because we didn't iter on last line
                         let nextLine = lines[i + 1];
-
+                        if (nextLine === undefined)
+                            throw "Can't find the next line";
                         let isUrl =
                             Helpers.isValidUrl(line) ||
                             Helpers.isValidUrl(nextLine);
 
                         let lineIsFooterNote = Helpers.isFooterNote(line);
 
-                        let nextWordLength = lines[i + 1].split(" ")[0].length;
+                        let firstWord = nextLine.split(" ")[0];
+                        if (firstWord === undefined)
+                            throw "Can't find the first word";
+                        let nextWordLength = firstWord.length;
                         let isNextWordTooLong =
                             nextWordLength + line.length + 1 >
                             paragraphLineMaxLength;
 
+                        if (nextLine[0] === undefined)
+                            throw "Can't find the nextLine first char";
                         let isLastCharAColonBreak =
                             line[line.length - 1] === ":" &&
                             nextLine[0].toUpperCase() == nextLine[0];
