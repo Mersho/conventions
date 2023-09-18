@@ -7,5 +7,6 @@
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
         "allowUnreachableCode": true,
+        "noFallthroughCasesInSwitch": true,
     },
 }
