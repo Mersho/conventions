@@ -65,7 +65,7 @@ module.exports = {
             rules: {
                 "body-prose": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -74,7 +74,7 @@ module.exports = {
 
                 "commit-hash-alone": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -83,7 +83,7 @@ module.exports = {
 
                 "empty-wip": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -96,7 +96,7 @@ module.exports = {
                     maxLineLength: number
                 ) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -107,13 +107,13 @@ module.exports = {
                 },
 
                 "footer-notes-misplacement": ({ body }: { body: any }) => {
-                    let bodyStr = Helpers.convertAnyToString(body, "body");
+                    let bodyStr = Helpers.convertAnyToString(body);
                     return Plugins.footerNotesMisplacement(bodyStr);
                 },
 
                 "footer-refs-validity": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -126,7 +126,7 @@ module.exports = {
                     header: any;
                 }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -135,7 +135,7 @@ module.exports = {
 
                 "proper-issue-refs": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -144,7 +144,7 @@ module.exports = {
 
                 "title-uppercase": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -153,7 +153,7 @@ module.exports = {
 
                 "too-many-spaces": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -162,7 +162,7 @@ module.exports = {
 
                 "type-space-after-colon": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -171,7 +171,7 @@ module.exports = {
 
                 "type-with-square-brackets": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -181,7 +181,7 @@ module.exports = {
                 // NOTE: we use 'header' instead of 'subject' as a workaround to this bug: https://github.com/conventional-changelog/commitlint/issues/3404
                 "subject-lowercase": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
                     return Plugins.subjectLowercase(headerStr);
@@ -189,7 +189,7 @@ module.exports = {
 
                 "type-space-after-comma": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 
@@ -201,7 +201,7 @@ module.exports = {
                     _: any,
                     maxLineLength: number
                 ) => {
-                    let bodyStr = Helpers.convertAnyToString(body, "body");
+                    let bodyStr = Helpers.convertAnyToString(body);
                     return Plugins.bodySoftMaxLineLength(
                         bodyStr,
                         maxLineLength
@@ -209,7 +209,7 @@ module.exports = {
                 },
 
                 "body-paragraph-line-min-length": ({ body }: { body: any }) => {
-                    let bodyStr = Helpers.convertAnyToString(body, "body");
+                    let bodyStr = Helpers.convertAnyToString(body);
                     return Plugins.bodyParagraphLineMinLength(
                         bodyStr,
                         headerMaxLineLength,
@@ -219,7 +219,7 @@ module.exports = {
 
                 "trailing-whitespace": ({ raw }: { raw: any }) => {
                     let rawStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(raw, "raw"),
+                        Helpers.convertAnyToString(raw),
                         notNullStringErrorMessage("raw")
                     );
 
@@ -228,7 +228,7 @@ module.exports = {
 
                 "type-space-before-paren": ({ header }: { header: any }) => {
                     let headerStr = Helpers.assertNotNull(
-                        Helpers.convertAnyToString(header, "header"),
+                        Helpers.convertAnyToString(header),
                         notNullStringErrorMessage("header")
                     );
 

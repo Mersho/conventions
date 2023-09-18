@@ -16,10 +16,7 @@ export abstract class Helpers {
     }
 
     // to convert from 'any' type
-    public static convertAnyToString(
-        potentialString: any,
-        paramName: string
-    ): string | null {
+    public static convertAnyToString(potentialString: any): string | null {
         if (potentialString === null || potentialString === undefined) {
             // otherwise, String(null) might give us the stupid string "null"
             return null;
