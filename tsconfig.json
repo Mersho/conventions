@@ -4,5 +4,6 @@
         "downlevelIteration": true,
         "lib": ["ES2021"],
         "noUncheckedIndexedAccess": true,
+        "noPropertyAccessFromIndexSignature": true,
     },
 }
