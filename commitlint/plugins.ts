@@ -58,7 +58,7 @@ export abstract class Plugins {
                     }
 
                     if (paragraph[0] === undefined)
-                        throw "Can't find the first word of the paragraph";
+                        throw "Can't find the first paragraph";
                     let startWithLowerCase = Helpers.isLowerCase(paragraph[0]);
 
                     let validParagraphEnd = paragraphHasValidEnding(paragraph);
