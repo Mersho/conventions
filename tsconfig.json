@@ -9,5 +9,6 @@
         "allowUnreachableCode": true,
         "noFallthroughCasesInSwitch": true,
         "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
     },
 }
