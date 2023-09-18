@@ -6,5 +6,6 @@
         "noUncheckedIndexedAccess": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
+        "allowUnreachableCode": true,
     },
 }
