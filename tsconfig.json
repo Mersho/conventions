@@ -11,5 +11,6 @@
         "exactOptionalPropertyTypes": true,
         "noImplicitOverride": true,
         "noUnusedParameters": true,
+        "noUnusedLocals":true,
     },
 }
