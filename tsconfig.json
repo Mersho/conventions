@@ -3,5 +3,6 @@
         "strict": true,
         "downlevelIteration": true,
         "lib": ["ES2021"],
+        "noUncheckedIndexedAccess": true,
     },
 }
