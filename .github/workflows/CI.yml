@@ -55,7 +55,7 @@ jobs:
         run: |
           git --version
           node --version
-          tsc --version
+          npx tsc --version
           npm --version
           npx commitlint --version
           yarn --version
