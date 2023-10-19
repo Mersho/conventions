@@ -96,16 +96,19 @@ let SanityCheckNugetPackages () =
 
     let notSubmodule (dir: DirectoryInfo): bool =
         let getSubmoduleDirsForThisRepo (): seq<DirectoryInfo> =
-            let regex = Regex("path\s*=\s*([^\s]+)")
-            seq {
-                for regexMatch in regex.Matches (File.ReadAllText (".gitmodules")) do
-                    let submoduleFolderRelativePath = regexMatch.Groups.[1].ToString ()
-                    let submoduleFolder =
-                        DirectoryInfo (
-                            Path.Combine (Directory.GetCurrentDirectory (), submoduleFolderRelativePath)
-                        )
-                    yield submoduleFolder
-            }
+            if File.Exists ".gitmodules" then
+                let regex = Regex("path\s*=\s*([^\s]+)")
+                seq {
+                    for regexMatch in regex.Matches (File.ReadAllText (".gitmodules")) do
+                        let submoduleFolderRelativePath = regexMatch.Groups.[1].ToString ()
+                        let submoduleFolder =
+                            DirectoryInfo (
+                                Path.Combine (Directory.GetCurrentDirectory (), submoduleFolderRelativePath)
+                            )
+                        yield submoduleFolder
+                }
+            else
+                Seq.empty
         not (getSubmoduleDirsForThisRepo().Any (fun d -> dir.FullName = d.FullName))
 
     // this seems to be a bug in Microsoft.Build nuget library, FIXME: report

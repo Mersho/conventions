@@ -31,6 +31,8 @@ jobs:
 
       - name: Compile the conventions solution
         run: dotnet build --configuration Release conventions.sln
+      - name: Sanity Check
+        run: dotnet fsi scripts/sanitycheck.fsx
       - name: Compile F# scripts
         run: dotnet fsi scripts/compileFSharpScripts.fsx
 
@@ -165,8 +167,6 @@ jobs:
 
           apt install --yes --no-install-recommends dotnet6
 
-      - name: Sanity Check
-        run: dotnet fsi scripts/sanitycheck.fsx
       - name: Check all files end with EOL
         run: dotnet fsi scripts/eofConvention.fsx
       - name: Check all .fsx scripts have shebang
