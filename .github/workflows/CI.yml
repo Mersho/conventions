@@ -165,6 +165,8 @@ jobs:
 
           apt install --yes --no-install-recommends dotnet6
 
+      - name: Sanity Check
+        run: dotnet fsi scripts/sanitycheck.fsx
       - name: Check all files end with EOL
         run: dotnet fsi scripts/eofConvention.fsx
       - name: Check all .fsx scripts have shebang
