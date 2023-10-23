@@ -13,7 +13,7 @@ open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
 
-#r "nuget: Fsdk, Version=0.6.0--date20230812-0646.git-2268d50"
+#r "nuget: Fsdk, Version=0.6.0--date20230214-0422.git-1ea6f62"
 open Fsdk
 open Fsdk.Process
 
