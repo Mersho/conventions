@@ -29,6 +29,20 @@ let RootDir = Path.Combine(ScriptsDir.FullName, "..") |> DirectoryInfo
 let NugetSolutionPackagesDir =
     Path.Combine(RootDir.FullName, "packages") |> DirectoryInfo
 
+type SolutionFile = | Default
+
+let GetSolution(solType: SolutionFile) =
+    let solFileName =
+        match solType with
+        | Default -> "conventions.sln"
+
+    let slnFile = Path.Combine(RootDir.FullName, solFileName) |> FileInfo
+
+    if not slnFile.Exists then
+        raise
+        <| FileNotFoundException("Solution file not found", slnFile.FullName)
+
+    slnFile
 
 module MapHelper =
     let GetKeysOfMap(map: Map<'K, 'V>) : seq<'K> =
@@ -567,26 +581,7 @@ let SanityCheckNugetPackages() =
                     yield solution
         }
 
-    //let solutions = Directory.GetCurrentDirectory() |> DirectoryInfo |> findSolutions
-    //NOTE: we hardcode the solutions rather than the line above, because e.g. Linux OS can't build/restore iOS proj
-    let solutionFileNames =
-        [
-            Path.Combine(ScriptsDir.FullName, "../conventions.sln")
-        ]
-
-    let solutionFiles = solutionFileNames |> List.map FileInfo
-
-    let checkFilesExist(fileNames: List<FileInfo>) =
-        fileNames
-        |> List.map(fun fileName -> fileName.Exists)
-        |> List.fold (&&) true
-
-    let allFilesExist = checkFilesExist solutionFiles
-
-    if not allFilesExist then
-        failwith "Solution files were not found to do sanity check."
-
-    sanityCheckNugetPackagesFromSolution solutionFiles.[0]
+    GetSolution SolutionFile.Default
 
 
 SanityCheckNugetPackages()

@@ -165,8 +165,6 @@ jobs:
 
           apt install --yes --no-install-recommends dotnet6
 
-      - name: Sanity check nuget packages 
-        run: dotnet fsi scripts/sanitycheck.fsx
       - name: Check all files end with EOL
         run: dotnet fsi scripts/eofConvention.fsx
       - name: Check all .fsx scripts have shebang
@@ -192,6 +190,10 @@ jobs:
         run: dotnet fsi scripts/inconsistentVersionsInFSharpScripts.fsx
       - name: Check there are no non-verbose flags in scripts and CI YML files
         run: dotnet fsi scripts/nonVerboseFlagsInGitHubCIAndScripts.fsx
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Sanity check nuget packages
+        run: dotnet fsi scripts/sanityCheckNuget.fsx
       - name: Install prettier
         run: npm install prettier@2.8.3
       - name: Change file permissions
