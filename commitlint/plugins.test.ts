@@ -1,7 +1,7 @@
 const { spawnSync } = require("child_process");
 
 function runCommitLintOnMsg(inputMsg: string) {
-    return spawnSync("npx", ["commitlint", "--verbose"], { input: inputMsg });
+    return spawnSync("npx.cmd", ["commitlint", "--verbose"], { input: inputMsg });
 }
 
 test("body-prose1", () => {
@@ -725,13 +725,14 @@ Blah blah blah: [1].
 
 [1] someUrl://blahblah.com
 [2] Stack trace:
+
 \` \` \`
 someCodeBlock
 \`\`\``;
     let footerRefsValidity9 = runCommitLintOnMsg(
         commitMsgWithCodeBlockAtRef
     );
-    console.log(footerRefsValidity9.stdout)
+    console.log(footerRefsValidity9.stdout.toString())
     expect(footerRefsValidity9.status).toBe(0);
 });
 
