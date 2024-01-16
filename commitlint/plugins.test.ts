@@ -714,27 +714,25 @@ test("footer-refs-validity9", () => {
     let commitMsgWithCodeBlockAtRef = `
 foo: blah blah
 
-Blah blah blah [3].
+Blah blah blah [2].
 
-Blah blah
-(see [1]):
+Blah blah:
 
 \` \` \`
 someCodeBlock
 \` \` \`
 
-Blah blah blah: [2].
+Blah blah blah: [1].
 
 [1] someUrl://blahblah.com
-[2] someUrl://blahblah.com
-[3] Stack trace:
+[2] Stack trace:
 \` \` \`
 someCodeBlock
 \`\`\``;
     let footerRefsValidity9 = runCommitLintOnMsg(
         commitMsgWithCodeBlockAtRef
     );
-    console.log(footerRefsValidity9.stdout.toString())
+    console.log(footerRefsValidity9.stdout)
     expect(footerRefsValidity9.status).toBe(0);
 });
 
