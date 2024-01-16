@@ -193,8 +193,10 @@ export abstract class Plugins {
             // workaround for https://github.com/conventional-changelog/conventional-changelog/issues/1016
             let bodyStr = rawStr.substring(lineBreakIndex).trim();
             bodyStr = Helpers.removeAllCodeBlocks(bodyStr);
+            console.log(bodyStr)
 
             let lines = Helpers.splitByEOLs(bodyStr, 1);
+            console.log(lines)
             let bodyReferences = new Set();
             let references = new Set();
             for (let line of lines) {
