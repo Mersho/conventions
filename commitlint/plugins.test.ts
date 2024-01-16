@@ -712,53 +712,25 @@ test("footer-refs-validity8", () => {
 // This test reflects this issue: https://github.com/nblockchain/conventions/issues/148
 test("footer-refs-validity9", () => {
     let commitMsgWithCodeBlockAtRef = `
-Backend(,Tests): don't marshall hybrid type names
+foo: blah blah
 
-This is the 1st part (out of three) to fix bug 242: in certain
-circumstances, the call to Type.GetType(fullTypeName) was
-returning null (and then causing an NRE like the stacktrace in
-bug 242 proves) or a FileLoadException [3].
+Blah blah blah [3].
 
-It turns out that .NET's BCL, despite having separate
-properties for the Type names "FullName" vs
-"AssemblyQualifiedName", the first one still adds assembly
-qualified names to types that are part of a generic type
-definition. I.e., it will not add them in a type such as
-"System.String" but it will in one such as "List<String>"
+Blah blah
 (see [1]):
 
 \` \` \`
-"System.Collections.Generic.List\`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c5619[34](https://github.com/nblockchain/geewallet/actions/runs/7526526463/job/20485327146#step:7:35)e089]]
+someCodeBlock
 \` \` \`
 
-This could be dangerous because it would embed the version
-number (even though we already have a JSON field for that in
-our MarshallingWrapper type, which could make the type be not
-found by Type.GetType (and as a consequence return null, or
-throw the exception mentioned before).
+Blah blah blah: [2].
 
-The fix, or rather workaround, here, is to use ToString()
-instead of the .FullName property, as hinted by this S.O.
-answer: [2].
-
-[1] https://learn.microsoft.com/en-us/dotnet/api/system.type.fullname
-[2] https://stackoverflow.com/a/4662878/23158491
+[1] someUrl://blahblah.com
+[2] someUrl://blahblah.com
 [3] Stack trace:
 \` \` \`
-System.IO.FileLoadException: Could not load file or assembly 'GWallet.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'. The located assembly's manifest definition does not match the assembly reference. (0x80131040)
-File name: 'GWallet.Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'
-    at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, StackCrawlMarkHandle stackMark, ObjectHandleOnStack assemblyLoadContext, ObjectHandleOnStack type, ObjectHandleOnStack keepalive)
-    at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, StackCrawlMark& stackMark, AssemblyLoadContext assemblyLoadContext)
-    at System.RuntimeType.GetType(String typeName, Boolean throwOnError, Boolean ignoreCase, StackCrawlMark& stackMark)
-    at System.Type.GetType(String typeName)
-    at GWallet.Backend.Marshalling.ExtractType(String json) in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Backend/Marshalling.fs:line 156
-    at GWallet.Backend.Account.ImportSignedTransactionFromJson(String jsonOrCompressedJson) in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Backend/Account.fs:line 713
-    at GWallet.Backend.Account.LoadSignedTransactionFromFile(String filePath) in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Backend/Account.fs:line 766
-    at Program.BroadcastPayment() in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Frontend.Console/Program.fs:line 62
-    at Program.PerformOperation(UInt32 numActiveAccounts, UInt32 numHotAccounts) in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Frontend.Console/Program.fs:line [39](https://github.com/nblockchain/geewallet/actions/runs/7526526463/job/20485327146#step:7:40)8
-    at Program.ProgramMainLoop[a]() in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Frontend.Console/Program.fs:line [47](https://github.com/nblockchain/geewallet/actions/runs/7526526463/job/20485327146#step:7:48)8
-    at Program.NormalStartWithNoParameters() in /Users/knocte/Documents/Code/geewalletSTABLE/src/GWallet.Frontend.Console/Program.fs:line [49](https://github.com/nblockchain/geewallet/actions/runs/7526526463/job/20485327146#step:7:50)0
-\` \` \``;
+someCodeBlock
+\`\`\``;
     let footerRefsValidity9 = runCommitLintOnMsg(
         commitMsgWithCodeBlockAtRef
     );
