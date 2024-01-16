@@ -734,6 +734,7 @@ someCodeBlock
     let footerRefsValidity9 = runCommitLintOnMsg(
         commitMsgWithCodeBlockAtRef
     );
+    console.log(footerRefsValidity9.stdout.toString())
     expect(footerRefsValidity9.status).toBe(0);
 });
 
