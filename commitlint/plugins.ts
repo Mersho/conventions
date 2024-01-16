@@ -199,6 +199,7 @@ export abstract class Plugins {
             let references = new Set();
             for (let line of lines) {
                 let matches = line.match(/(?<=\[)([0-9]+)(?=\])/g);
+                console.log(matches)
                 if (matches === null) {
                     continue;
                 }
