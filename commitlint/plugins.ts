@@ -218,8 +218,8 @@ export abstract class Plugins {
                 }
             }
             console.log("offence: " + offence.toString())
-            console.log(references)
-            console.log(bodyReferences)
+            console.log("references: " + references)
+            console.log("bodyReferences: " + bodyReferences)
             for (let ref of bodyReferences) {
                 if (!references.has(ref)) {
                     offence = true;
