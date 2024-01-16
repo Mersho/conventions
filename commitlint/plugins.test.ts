@@ -711,8 +711,7 @@ test("footer-refs-validity8", () => {
 
 // This test reflects this issue: https://github.com/nblockchain/conventions/issues/148
 test("footer-refs-validity9", () => {
-    let commitMsgWithCodeBlockAtRef = `
-foo: blah blah
+    let commitMsgWithCodeBlockAtRef = `foo: blah blah
 
 Blah blah blah [2].
 
