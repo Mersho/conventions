@@ -213,6 +213,7 @@ export abstract class Plugins {
                     }
                 }
             }
+            console.log("offence: " + offence.toString())
             console.log(references)
             console.log(bodyReferences)
             for (let ref of bodyReferences) {
@@ -221,12 +222,14 @@ export abstract class Plugins {
                     break;
                 }
             }
+            console.log("offence: " + offence.toString())
             for (let ref of references) {
                 if (!bodyReferences.has(ref)) {
                     offence = true;
                     break;
                 }
             }
+            console.log("offence: " + offence.toString())
         }
 
         let errorMessage =
