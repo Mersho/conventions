@@ -71,14 +71,12 @@ jobs:
 
     # TODO: upgrade to 24.04->24.04 (because LTS) as soon as it's available, instead of 22.04->23.10
     runs-on: ubuntu-22.04
-    container:
-      image: "ubuntu:23.10"
     steps:
       - uses: actions/checkout@v4
       - name: Install required dependencies
         run: |
-          apt update
-          apt install --yes sudo
+          sudo apt update
+          sudo apt install --yes sudo
           sudo apt install --yes --no-install-recommends git ca-certificates
 
           sudo apt install --yes --no-install-recommends npm curl
@@ -88,9 +86,8 @@ jobs:
           node --version
           npm --version
       - name: Install commitlint
-        run: |
-          npm install conventional-changelog-conventionalcommits
-          npm install commitlint@latest
+        # NOTE: maintain this line below in sync with commitlint.sh
+        run: npm install @commitlint/{config-conventional@v18.6.1,cli@v18.6.1}
       - name: Install yarn
         run: |
           npm install --global yarn
@@ -109,21 +106,18 @@ jobs:
     needs: build-ts
     # TODO: upgrade to 24.04->24.04 (because LTS) as soon as it's available, instead of 22.04->23.10
     runs-on: ubuntu-22.04
-    container:
-      image: "ubuntu:23.10"
     steps:
       - uses: actions/checkout@v4
       - name: Install required dependencies
         run: |
-          apt update
-          apt install --yes sudo
+          sudo apt update
+          sudo apt install --yes sudo
           sudo apt install --yes --no-install-recommends git ca-certificates
 
           sudo apt install --yes --no-install-recommends npm curl
       - name: Install commitlint
-        run: |
-          npm install conventional-changelog-conventionalcommits
-          npm install commitlint@latest
+        # NOTE: maintain this line below in sync with commitlint.sh
+        run: npm install @commitlint/{config-conventional@v18.6.1,cli@v18.6.1}
       - name: Install yarn
         run: |
           npm install --global yarn
