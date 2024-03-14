@@ -119,7 +119,7 @@ jobs:
       - name: Configure git in container
         run: |
           chown -R $(id -u):$(id -g) $PWD
-          git config --system --add safe.directory '*'
+          git config --system --add safe.directory "$GITHUB_WORKSPACE"
           git log -2
       - name: Install yarn
         run: |
