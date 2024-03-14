@@ -118,7 +118,8 @@ jobs:
 
           sudo apt install --yes --no-install-recommends npm curl
       - name: Configure git in container
-        run: git init
+        run: |
+          git log -2
       - name: Install yarn
         run: |
           npm install --verbose --global yarn
