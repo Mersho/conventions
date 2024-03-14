@@ -16,5 +16,6 @@ test("subject-full-stop1", () => {
 test("subject-full-stop2", () => {
     let commitMsgWithoutEndingDotInTitle = "foo/bar: bla bla blah";
     let subjectFullStop2 = runCommitLintOnMsg(commitMsgWithoutEndingDotInTitle);
+    console.log(subjectFullStop2.stdout.toString())
     expect(subjectFullStop2.status).toBe(0);
 });
