@@ -133,7 +133,9 @@ jobs:
           yarn --version
           npx tsc --version
       - name: Install commitlint
-        run: ./commitlint.sh --version
+        run: |
+          pwd
+          ./commitlint.sh --version
       - name: ensure commitlint is working
         run: |
           pwd
