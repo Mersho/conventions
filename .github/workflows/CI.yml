@@ -118,7 +118,7 @@ jobs:
           sudo apt install --yes --no-install-recommends npm curl
       - name: Configure git in container
         run: |
-          chown -R $(id -u):$(id -g) $PWD
+          sudo chown -R $(id -u):$(id -g) $PWD
           git config --system --add safe.directory $(pwd)
           git log -2
           npx commitlint --from HEAD~2 --to HEAD --verbose
