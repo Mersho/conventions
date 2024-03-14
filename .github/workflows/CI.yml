@@ -109,6 +109,7 @@ jobs:
     container:
       image: "ubuntu:23.10"
     steps:
+      - uses: actions/checkout@v4
       - name: Install required dependencies
         run: |
           apt update
@@ -117,12 +118,11 @@ jobs:
 
           sudo apt install --yes --no-install-recommends npm curl
       - name: Configure git in container
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        run: git init
       - name: Install yarn
         run: |
           npm install --verbose --global yarn
           yarn add --dev jest typescript ts-jest @types/jest ts-node
-      - uses: actions/checkout@v4
       - name: Install commitlint dependencies
         run: npm install --verbose @commitlint/types
       - name: Run typescript compiler
