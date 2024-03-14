@@ -120,7 +120,6 @@ jobs:
         run: |
           sudo chown -R $(id -u):$(id -g) $PWD
           git log -2
-          npx commitlint --from HEAD~2 --to HEAD --verbose
       - name: Install yarn
         run: |
           npm install --verbose --global yarn
@@ -138,6 +137,8 @@ jobs:
           npx tsc --version
       - name: Install commitlint
         run: ./commitlint.sh --version
+      - name: test commitlint
+        run: npx commitlint --from HEAD~2 --to HEAD --verbose
       - name: Run tests to validate our plugins
         run: yarn jest --config jest.config.ts
 
