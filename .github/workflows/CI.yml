@@ -119,6 +119,10 @@ jobs:
           sudo apt install --yes --no-install-recommends git ca-certificates
 
           sudo apt install --yes --no-install-recommends npm curl
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Configure git in container
         run: |
           chown -R $(id -u):$(id -g) $PWD
