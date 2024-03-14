@@ -119,7 +119,7 @@ jobs:
           sudo apt install --yes --no-install-recommends npm curl
       - name: Configure git in container
         run: |
-          sudo export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+          export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
           git log -2
       - name: Install yarn
         run: |
