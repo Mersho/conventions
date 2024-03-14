@@ -250,7 +250,7 @@ let remote, remoteUrl =
 
         remotes.ElementAt 0
 
-let currentBranch = Git.GetCurrentBranch()
+let currentBranch = "WIP/LatestCommitlint"
 
 let commitsToBePushed =
     match maybeNumberOfCommits with
