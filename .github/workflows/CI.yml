@@ -119,7 +119,6 @@ jobs:
       - name: Configure git in container
         run: |
           sudo chown -R $(id -u):$(id -g) $PWD
-          git config --system --add safe.directory $(pwd)
           git log -2
           npx commitlint --from HEAD~2 --to HEAD --verbose
       - name: Install yarn
