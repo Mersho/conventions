@@ -138,7 +138,9 @@ jobs:
       - name: Install commitlint
         run: ./commitlint.sh --version
       - name: test commitlint
-        run: npx commitlint --from HEAD~2 --to HEAD --verbose
+        run: |
+          rm commitlint.config.js
+          npx commitlint --from HEAD~2 --to HEAD --verbose
       - name: Run tests to validate our plugins
         run: yarn jest --config jest.config.ts
 
